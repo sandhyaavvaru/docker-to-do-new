@@ -1,0 +1,20 @@
+version: "3.3"
+services:
+  app:
+    image: todoapp
+    ports:
+      - 9090:3000
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: mypassword
+      MYSQL_DB: todos
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - todo-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+      MYSQL_DATABASE: todos
+volumes:
+  todo-mysql-data:
