@@ -1,5 +1,5 @@
 pipeline{
-agent any {
+agent any 
    environment{
        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
    }
@@ -17,6 +17,5 @@ agent any {
 }
     stage('push') {
     sh 'docker push sandhyaavvaru/jenkins-todo:v2'
-}
 }
 }
