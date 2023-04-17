@@ -5,20 +5,32 @@ pipeline{
    environment{
        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
    }
+   stages{
     stage('continuous download') {
+      step {
     git branch: 'main', url: 'https://github.com/sandhyaavvaru/docker-to-do-new.git'
-} 
+      }
+    } 
     stage('continuous build') {
-    sh 'docker build -t todo2 .' 
-} 
+      step {
+       sh 'docker build -t todo2 .' 
+      }
+    } 
     stage('login') {
-    sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PASSWD'
-} 
+       step{
+       sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PASSWD'
+       }
+    }
+       
     stage('tag') {
-    sh 'docker tag todo2 sandhyaavvaru/jenkins-todo:v2'
-} 
+      step {
+        sh 'docker tag todo2 sandhyaavvaru/jenkins-todo:v2'
+      }
+    } 
     stage('push') {
-    sh 'docker push sandhyaavvaru/jenkins-todo:v2'
-} 
+        step{
+        sh 'docker push sandhyaavvaru/jenkins-todo:v2'
+        }
+     } 
 }
-
+}
