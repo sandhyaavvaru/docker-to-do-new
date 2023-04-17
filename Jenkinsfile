@@ -23,12 +23,12 @@ pipeline{
     }
     stage('tag') {
        steps{
-          sh 'docker tag todo2 sandhyaavvaru/jenkins-todo:v2'
+          sh 'docker tag todo2 sandhyaavvaru/jenkins-todo:v3'
        }
     }
     stage('push') {
        steps{
-          sh 'docker push sandhyaavvaru/jenkins-todo:v2'
+          sh 'docker push sandhyaavvaru/jenkins-todo:v3'
        }
     }
    }
