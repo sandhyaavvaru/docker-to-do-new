@@ -1,5 +1,7 @@
 pipeline{
-   node('docker') {
+   agent {
+   label 'docker'
+   }
    environment{
        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
    }
@@ -10,7 +12,7 @@ pipeline{
     sh 'docker build -t todo2 .' 
 } 
     stage('login') {
-    sh 'docker login -u $USERNAME -p $PASSWORD'
+    sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PASSWD'
 } 
     stage('tag') {
     sh 'docker tag todo2 sandhyaavvaru/jenkins-todo:v2'
